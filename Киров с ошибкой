@@ -1,0 +1,88 @@
+unit Unit1;
+
+{$mode objfpc}{$H+}
+
+interface
+
+uses
+  Classes, SysUtils, FileUtil, TAGraph, TASeries, TARadialSeries, TAFuncSeries,
+  Forms, Controls, Graphics, Dialogs, StdCtrls;
+
+type
+
+  { TForm1 }
+
+  TForm1 = class(TForm)
+    Button1: TButton;
+    Button3: TButton;
+    Chart1: TChart;
+    Chart1LineSeries1: TLineSeries;
+    Edit1: TEdit;
+    Edit2: TEdit;
+    Edit3: TEdit;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    Memo1: TMemo;
+    procedure Button1Click(Sender: TObject);
+    procedure Button3Click(Sender: TObject);
+  private
+    { private declarations }
+  public
+    { public declarations }
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.lfm}
+
+{ TForm1 }
+
+procedure TForm1.Button3Click(Sender: TObject);
+begin
+  close;
+end;
+
+Function f(x: real): real;
+  Begin
+    f := exp(x)-(1/x)-1;
+  End;
+
+procedure TForm1.Button1Click(Sender: TObject);
+var a,b,y,z,toch,nach,kon,last,c,i:real;
+kor,func:string;
+begin
+memo1.Clear;
+nach:=strtofloat(Edit2.Text);
+kon:=strtofloat(Edit3.Text);
+toch:=strtofloat(Edit1.Text);
+
+if (f(nach)*f(kon))>0 then
+showmessage('Корней нету')
+else
+begin
+c:=(nach+kon)/2;
+
+if abs(f(c))>toch then
+begin
+  if (f(nach)*f(c))>0 then
+  nach:=c
+  else
+  kon:=c;
+  c:= (nach+kon)/2;
+
+   Chart1LineSeries1.AddXY(c,f(c));
+    Str(c:3:3,kor);
+  Str(f(c):4:4,func);
+     memo1.Lines.Add('x='+kor);
+     memo1.Lines.Add('F(x)='+ func);
+end;
+end;
+end;
+
+end.
