@@ -68,7 +68,7 @@ else
 begin
 c:=(nach+kon)/2;
 
-if abs(f(c))>toch then
+while abs(f(c))>toch do
 begin
   if (f(nach)*f(c))>0 then
   nach:=c
