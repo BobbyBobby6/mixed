@@ -58,7 +58,7 @@ begin
 
    s:=InputBox('Введите y','Ввод y','');
    val(s,y,code2);
-   if code2<>0 then then
+   if code2<>0 then
     begin
      showmessage('неверный ввод y');
      exit;
